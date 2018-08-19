@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'agile-gallery.herokuapp.com',
+    'localhost',
 ]
 
 
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gallery'
+    'gallery',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'firstapp.urls'
@@ -142,3 +145,4 @@ STATIC_ROOT = (os.path.join(BASE_DIR, 'static'))
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'gallery/media/')
+CORS_ORIGIN_ALLOW_ALL = True
