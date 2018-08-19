@@ -7,6 +7,8 @@ from django.contrib import admin
 from gallery.models import Media
 
 from gallery.models import User
+from .models import Clip
 
+admin.site.register(Clip)
 admin.site.register(Media)
 admin.site.register(User)

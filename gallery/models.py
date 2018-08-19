@@ -4,6 +4,13 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class Clip(models.Model):
+    idClip = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    seg_initial = models.BigIntegerField()
+    seg_final = models.BigIntegerField()
+
+
 class User(models.Model):
     idUser = models.FloatField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -26,3 +33,4 @@ class Media(models.Model):
     city = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=500)
+    clips = models.ManyToManyField(Clip)
