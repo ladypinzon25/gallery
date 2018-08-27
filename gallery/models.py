@@ -23,6 +23,24 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+
+#se define funcion para actualizar datos de usuario
+    def update(self, idUser, name, lastName,email,country,city,password):
+        try:
+            _user=User.objects.get(idUser=idUser)
+            _user.name=name
+            _user.lastName= lastName
+            _user.email=email
+            _user.country=country
+            _user.city=city
+            _user.password=password
+            _user.save()
+            return True
+        except:
+            return False
+
+
+
 #photo = models.ImageField(upload_to='/images/')
 
 

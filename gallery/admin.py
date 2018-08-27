@@ -11,5 +11,12 @@ from .models import Clip,Categoria
 
 admin.site.register(Clip)
 admin.site.register(Media)
-admin.site.register(User)
+#admin.site.register(User)
 admin.site.register(Categoria)
+
+class UserAdmin (admin.ModelAdmin):
+    list_display = ['idUser','name','lastName']
+
+admin.site.register(User,UserAdmin)
+
+
