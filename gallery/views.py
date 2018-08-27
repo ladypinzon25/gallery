@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.core import serializers as jsonserializer
 from django.views.decorators.csrf import  csrf_exempt
 import json
+from django.http import Http404
 
 def all_media(request):
     all_media_objects = Media.objects.all()
@@ -65,3 +66,9 @@ def create(request):
             return HttpResponse(json.dumps(res), content_type="application/json")
         else:
             return HttpResponse('Metodo no definido')
+def user_by_id(request, user_id):
+    try:
+        user = User.objects.filter(idUser=user_id)
+    except User.DoesNotExist:
+        raise Http404("User does not exist.")
+    return HttpResponse(jsonserializer.serialize("json", user))

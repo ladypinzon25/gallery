@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^users/$', views.all_users, name="All users"),
     url(r'^modify/$', views.modify, name="Modify"),
     url(r'^create/$', views.create, name="Create"),
-
+    url(r'^user/(?P<user_id>\d+)/$', views.user_by_id, name="User by id"),
 ]
