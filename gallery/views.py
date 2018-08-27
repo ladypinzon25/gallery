@@ -24,14 +24,14 @@ def all_users(request):
 def modify(request):
 
     if request.method == 'POST':
-
-        name = request.POST.get('name', None)
-        lastName = request.POST.get('lastName', None)
-        email = request.POST.get('email', None)
-        country = request.POST.get('country', None)
-        city = request.POST.get('city', None)
-        pws = request.POST.get('password', None)
-        id = request.POST.get('idUser', None)
+        data = json.loads(request.body)
+        name = data["name"]
+        lastName = data["lastName"]
+        email = data["email"]
+        country = data["country"]
+        city = data["city"]
+        pws = data["password"]
+        id = data["idUser"]
         _user=User()
         if(_user.update(id, name, lastName,email,country,city,pws)):
             res={"status":"Ok","Content:":"Usuario Modificado"}
@@ -47,14 +47,14 @@ def modify(request):
 def create(request):
 
         if request.method == 'POST':
-
-            name = request.POST.get('name', None)
-            lastName = request.POST.get('lastName', None)
-            email = request.POST.get('email', None)
-            country = request.POST.get('country', None)
-            city = request.POST.get('city', None)
-            pws = request.POST.get('password', None)
-            id = request.POST.get('idUser', None)
+            data=json.loads(request.body)
+            name = data["name"]
+            lastName = data["lastName"]
+            email = data["email"]
+            country = data["country"]
+            city = data["city"]
+            pws = data["password"]
+            id = data["idUser"]
             _user = User(name = name,lastName=lastName,email=email,country=country,city=city,password=pws,idUser=id)
             try:
                 _user.save()
