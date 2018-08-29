@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from gallery.models import Media
 from gallery.models import User
+from gallery.models import Categoria
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers as jsonserializer
 from django.views.decorators.csrf import  csrf_exempt
@@ -72,3 +73,12 @@ def user_by_id(request, user_id):
     except User.DoesNotExist:
         raise Http404("User does not exist.")
     return HttpResponse(jsonserializer.serialize("json", user))
+
+
+def all_categories (request):
+    return HttpResponse(jsonserializer.serialize("json", Categoria.objects.all()))
+
+
+def media_by_categoria (request, categoria_id):
+    mediaList = Media.objects.filter(categoria=categoria_id)
+    return HttpResponse(jsonserializer.serialize("json", mediaList))

@@ -43,7 +43,9 @@ class User(models.Model):
 
 #photo = models.ImageField(upload_to='/images/')
 
-
+class Categoria(models.Model):
+    idCategoria = models.FloatField(primary_key=True)
+    name = models.CharField(max_length=255)
 
 class Media(models.Model):
     MEDIA_TYPES_CHOICES = (
@@ -61,8 +63,6 @@ class Media(models.Model):
     url = models.CharField(max_length=500)
     clips = models.ManyToManyField(Clip, blank=True)
     fec_create = models.DateField(default=datetime.date.today)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
 
 
-class Categoria(models.Model):
-    idCategoria = models.FloatField(primary_key=True)
-    name = models.CharField(max_length=255)
