@@ -65,4 +65,9 @@ class Media(models.Model):
     fec_create = models.DateField(default=datetime.date.today)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
 
+    def add_clip(self, Clip, id_parent):
+        _media = Media.objects.get(idMedia=id_parent)
+        _media.clips.add(Clip)
+
+
 
