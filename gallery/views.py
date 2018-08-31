@@ -134,3 +134,11 @@ def clip_by_id(request, clip_id):
     except Clip.DoesNotExist:
         raise Http404("User does not exist.")
     return HttpResponse(jsonserializer.serialize("json", clip))
+
+#Retorna todos los clips pertenecientes a un id de Media
+def all_clips_by_media(request,media_id):
+    try:
+       list = Media.objects.get(idMedia=media_id).clips.all()
+    except Media.DoesNotExist:
+        raise Http404("Clips not found")
+    return HttpResponse(jsonserializer.serialize("json", list))
