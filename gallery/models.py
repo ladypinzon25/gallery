@@ -23,6 +23,8 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+    def __str__(self):
+        return self.name + " " + self.lastName
 
 #se define funcion para actualizar datos de usuario
     def update(self, idUser, name, lastName,email,country,city,password):
@@ -46,6 +48,8 @@ class User(models.Model):
 class Categoria(models.Model):
     idCategoria = models.FloatField(primary_key=True)
     name = models.CharField(max_length=255)
+    def __str__(self):
+        return self.name
 
 class Media(models.Model):
     MEDIA_TYPES_CHOICES = (
