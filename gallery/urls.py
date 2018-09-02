@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^media/(?P<media_id>\d+)/clips/$', views.all_clips_by_media, name="Clip by media"),
     url(r'^user/(?P<user_id>\w+)/$', views.user_by_id, name="User by id"),
     url(r'^media/(?P<categoria_id>\d+)/$', views.media_by_categoria, name="Media by categoria"),
+    url(r'^uploads/user/(?P<id_user>\w+)/$', views.simple_upload, name='simple_upload'),
 
 ]

@@ -15,6 +15,8 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='avatars',blank=True)
+
     def __str__(self):
         return self.name + " " + self.lastName
 

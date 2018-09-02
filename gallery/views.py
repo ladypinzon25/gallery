@@ -9,6 +9,9 @@ from django.views.decorators.csrf import  csrf_exempt
 import json
 import logging
 from django.http import Http404
+from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 logger = logging.getLogger(__name__)
 
@@ -143,3 +146,21 @@ def all_clips_by_media(request,media_id):
     except Media.DoesNotExist:
         raise Http404("Clips not found")
     return HttpResponse(jsonserializer.serialize("json", list))
+
+@csrf_exempt
+def simple_upload(request,id_user):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        try:
+            _user = User.objects.get(idUser=id_user)
+            _user.image = uploaded_file_url
+            _user.save()
+        except:
+            res = {"status": "Error", "Content:": "Error al crear clip"}
+            return HttpResponse(json.dumps(res), content_type="application/json")
+        return HttpResponse(jsonserializer.serialize("json",_user))
+    else:
+        return HttpResponse('Metodo no definido')
