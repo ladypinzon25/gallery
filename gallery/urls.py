@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^create_clip/$', views.create_clip, name="Create Clip"),
     url(r'^clip/(?P<clip_id>\d+)/$', views.clip_by_id, name="Clip by id"),
     url(r'^media/(?P<media_id>\d+)/clips/$', views.all_clips_by_media, name="Clip by media"),
-    url(r'^user/(?P<user_id>\d+)/$', views.user_by_id, name="User by id"),
+    url(r'^user/(?P<user_id>\w+)/$', views.user_by_id, name="User by id"),
     url(r'^media/(?P<categoria_id>\d+)/$', views.media_by_categoria, name="Media by categoria"),
 
 ]
