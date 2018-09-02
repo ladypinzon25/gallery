@@ -15,7 +15,7 @@ class Clip(models.Model):
 
 
 class User(models.Model):
-    idUser = models.CharField(primary_key=True,max_length=20)
+    idUser = models.CharField(primary_key=True,max_length=200)
     name = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     email = models.CharField(max_length=500)
