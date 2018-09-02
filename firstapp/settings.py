@@ -83,18 +83,27 @@ WSGI_APPLICATION = 'firstapp.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    # Local
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'postgres',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'admin',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432'
-    # }
+     #Local
+     #'default': {
+     #   'ENGINE': 'django.db.backends.postgresql_psycopg2',
+     #    'NAME': 'postgres',
+     #    'USER': 'postgres',
+     #    'PASSWORD': 'admin',
+     #    'HOST': 'localhost',
+     #    'PORT': '5432'
+     #}
+
+     #Local leo
+     #'default': {
+     #   'ENGINE': 'django.db.backends.postgresql_psycopg2',
+     #    'NAME': 'gallery',
+     #    'USER': 'postgres',
+     #    'PASSWORD': 'postgres',
+     #    'HOST': 'localhost',
+     #    'PORT': '5432'
+     #}
 
     #Amazon
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'fhxkyhks',

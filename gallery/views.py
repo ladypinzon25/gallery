@@ -109,14 +109,13 @@ def create_clip(request):
         name_clip = data["name"]
         seg_init = data["start"]
         seg_end = data["end"]
-        parent_id = data["idMedia"]
-        new_clip = Clip(idClip=id_clip, name=name_clip, seg_initial=seg_init, seg_final=seg_end)
+        user_clip = User.objects.get(idUser=data["idUser"]);
+        media_clip = Media.objects.get(idMedia=data["idMedia"])
+        new_clip = Clip(idClip=id_clip, name=name_clip, seg_initial=seg_init, seg_final=seg_end, user=user_clip, media=media_clip)
         logging.error('datos obtenidos')
         try:
             new_clip.save()
             logging.error('guardando')
-            Media.add_clip(Media.objects.get(idMedia=parent_id), new_clip, parent_id)
-            logging.error('agregando')
             res = {"status": "Ok", "Content:": "Clip creado"}
         except:
             res = {"status": "Error", "Content:": "Error al crear clip"}
@@ -135,10 +134,12 @@ def clip_by_id(request, clip_id):
         raise Http404("User does not exist.")
     return HttpResponse(jsonserializer.serialize("json", clip))
 
+
 #Retorna todos los clips pertenecientes a un id de Media
 def all_clips_by_media(request,media_id):
     try:
-       list = Media.objects.get(idMedia=media_id).clips.all()
+        media = Media.objects.get(idMedia=media_id)
+        list = Clip.objects.filter(media=media)
     except Media.DoesNotExist:
         raise Http404("Clips not found")
     return HttpResponse(jsonserializer.serialize("json", list))

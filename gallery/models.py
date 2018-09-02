@@ -6,14 +6,6 @@ from django.db import models
 
 import datetime
 
-
-class Clip(models.Model):
-    idClip = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200)
-    seg_initial = models.BigIntegerField()
-    seg_final = models.BigIntegerField()
-
-
 class User(models.Model):
     idUser = models.CharField(primary_key=True,max_length=200)
     name = models.CharField(max_length=255)
@@ -43,6 +35,7 @@ class User(models.Model):
 
 
 
+
 #photo = models.ImageField(upload_to='/images/')
 
 class Categoria(models.Model):
@@ -65,13 +58,17 @@ class Media(models.Model):
     city = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=500)
-    clips = models.ManyToManyField(Clip, blank=True)
     fec_create = models.DateField(default=datetime.date.today)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
 
-    def add_clip(self, Clip, id_parent):
-        _media = Media.objects.get(idMedia=id_parent)
-        _media.clips.add(Clip)
 
 
+
+class Clip(models.Model):
+    idClip = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    seg_initial = models.BigIntegerField()
+    seg_final = models.BigIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    media = models.ForeignKey(Media, on_delete=models.CASCADE, default=1)
 
