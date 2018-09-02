@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'agile-gallery.herokuapp.com',
     'localhost',
+    'clipstar.herokuapp.com',
+    'http://localhost:3000'
 ]
 
 
