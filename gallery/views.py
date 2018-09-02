@@ -105,7 +105,7 @@ def media_by_categoria (request, categoria_id):
 def create_clip(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        id_clip = data["idClip"]
+        id_clip = Clip.objects.latest("idClip").idClip +1
         name_clip = data["name"]
         seg_init = data["start"]
         seg_end = data["end"]
