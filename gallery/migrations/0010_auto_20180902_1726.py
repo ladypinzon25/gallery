@@ -13,20 +13,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='media',
-            name='clips',
-        ),
-        migrations.AddField(
-            model_name='clip',
-            name='media',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='gallery.Media'),
-        ),
-        migrations.AddField(
-            model_name='clip',
-            name='user',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='gallery.User'),
-        ),
         migrations.AlterField(
             model_name='user',
             name='idUser',

@@ -6,6 +6,7 @@ from gallery.models import Categoria
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers as jsonserializer
 from django.views.decorators.csrf import  csrf_exempt
+from django.core.mail import send_mail
 import json
 import logging
 from django.http import Http404
@@ -112,13 +113,19 @@ def create_clip(request):
         name_clip = data["name"]
         seg_init = data["start"]
         seg_end = data["end"]
-        user_clip = User.objects.get(idUser=data["idUser"]);
+        user_clip = User.objects.get(idUser=data["idUser"])
+        user_name = user_clip.name
         media_clip = Media.objects.get(idMedia=data["idMedia"])
         new_clip = Clip(idClip=id_clip, name=name_clip, seg_initial=seg_init, seg_final=seg_end, user=user_clip, media=media_clip)
         logging.error('datos obtenidos')
         try:
             new_clip.save()
             logging.error('guardando')
+            send_mail('Nuevo Clip',
+                      'Hola ' + user_name + ', Se ha creado un nuevo clip.',
+                      'clipstaragil6@gmail.com',
+                      [user_clip.email],
+                      fail_silently=False)
             res = {"status": "Ok", "Content:": "Clip creado"}
         except:
             res = {"status": "Error", "Content:": "Error al crear clip"}

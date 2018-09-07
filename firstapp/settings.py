@@ -37,13 +37,14 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'gallery',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gallery',
+    'django.core.mail',
     'corsheaders'
 ]
 
@@ -158,3 +159,9 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'gallery/media/')
 CORS_ORIGIN_ALLOW_ALL = True
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'clipstaragil6@gmail.com'
+EMAIL_HOST_PASSWORD = 'clipstar123'
+EMAIL_PORT = 587
