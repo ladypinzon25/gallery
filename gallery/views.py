@@ -116,15 +116,17 @@ def create_clip(request):
         user_clip = User.objects.get(idUser=data["idUser"])
         user_name = user_clip.name
         media_clip = Media.objects.get(idMedia=data["idMedia"])
+        user_media = media_clip.user
         new_clip = Clip(idClip=id_clip, name=name_clip, seg_initial=seg_init, seg_final=seg_end, user=user_clip, media=media_clip)
         logging.error('datos obtenidos')
         try:
             new_clip.save()
             logging.error('guardando')
             send_mail('Nuevo Clip',
-                      'Hola ' + user_name + ', Se ha creado un nuevo clip.',
+                      'Saludos desde Clipstar, el usuario '+ user_clip.name +' '+ user_clip.lastName +
+                      ' ha creado un nuevo clip en el video de '+ user_media.name +' ' + user_media.lastName+'.',
                       'clipstaragil6@gmail.com',
-                      [user_clip.email],
+                      [user_clip.email,user_media.email],
                       fail_silently=False)
             res = {"status": "Ok", "Content:": "Clip creado"}
         except:
