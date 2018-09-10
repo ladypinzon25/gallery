@@ -59,16 +59,22 @@ def create(request):
             name = data["name"]
             lastName = data["lastName"]
             email = data["email"]
+            login = data["login"]
             country = data["country"]
             city = data["city"]
             pws = data["password"]
             id = data["idUser"]
-            _user = User(name = name,lastName=lastName,email=email,country=country,city=city,password=pws,idUser=id)
+            image = data["image"]
+            _user = User(name = name,lastName=lastName,email=email, login=login, country=country,city=city,password=pws,idUser=id, image=image)
             try:
-                _user.save()
-                res = {"status": "Ok", "Content:": "Usuario creado"}
-            except:
+                user = User.objects.filter(idUser=id)
+                if not user:
+                    _user.save()
+                    res = {"status": "Ok", "Content:": "Usuario creado"}
+                else:
+                    return HttpResponse('user already exists', status=401)
 
+            except:
                 res = {"status": "Error", "Content:": "Error al crear usuario"}
 
             return HttpResponse(json.dumps(res), content_type="application/json")
