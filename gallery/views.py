@@ -173,3 +173,16 @@ def simple_upload(request,id_user):
         return HttpResponse(jsonserializer.serialize("json",_user))
     else:
         return HttpResponse('Metodo no definido')
+
+@csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        login = data["login"]
+        password = data["password"]
+        user = User.objects.filter(login=login, password=password)
+        if not user:
+            return HttpResponse('username or invalid password', status=401)
+        return HttpResponse(jsonserializer.serialize("json", user))
+
+
